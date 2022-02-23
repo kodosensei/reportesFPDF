@@ -1,6 +1,7 @@
 <?php
 require('fpdf/fpdf.php');
 date_default_timezone_set('America/El_Salvador');
+
 class PDF extends FPDF
 {
 // Cabecera de página
@@ -20,9 +21,20 @@ class PDF extends FPDF
   
 function Header()
 {
-
 $this->Image('img/waves.png',-10,-1,110);
-// $this->Image('img/wavesrecorte.png',-10,-1,170);
+$this->Image('img/shinheky.png',150,15,25);
+$this->SetY(40);
+$this->SetX(143);
+
+$this->SetFont('Arial','B',12);
+$this->Cell(89, 8, 'REPORTE DE BAJAS',0,1);
+$this->SetY(45);
+$this->SetX(144);
+$this->SetFont('Arial','',8);
+$this->Cell(40, 8, utf8_decode('3º Escuadrón de la Muralla María'));
+
+$this->Ln(20);
+
 }
 
 function Footer()
@@ -50,27 +62,10 @@ $pdf->SetLeftMargin(10);
 $pdf->SetRightMargin(10);
 
 
-$pdf->Image('img/shinheky.png',150,15,25);
 
-$pdf->SetY(40);
-// $pdf->SetX(5);
-// $pdf->SetFont('Arial','B',20);
-
-// $pdf->SetTextColor(30,10,32);
-// $pdf->Cell(50, 8, 'REPORTE DE BAJAS',0,0);
-$pdf->SetX(143);
-$pdf->SetFont('Arial','B',12);
-$pdf->Cell(89, 8, 'REPORTE DE BAJAS',0,1);
-$pdf->SetY(45);
-$pdf->SetX(144);
-$pdf->SetFont('Arial','',8);
-$pdf->Cell(40, 8, utf8_decode('3º Escuadrón de la Muralla María'));
-
-$pdf->Ln(30);
 
 $pdf->SetX(15);
 $pdf->SetFillColor(25,132,151);
-// $pdf->SetDrawColor(255, 255, 255);
 
 $pdf->SetFont('Arial','B',10);
 $pdf->Cell(12, 12, utf8_decode('N°'),0,0,'C',1);
@@ -80,8 +75,13 @@ $pdf->Cell(30, 12, utf8_decode('Cantidad'),0,0,'C',1);
 $pdf->Cell(30, 12, utf8_decode('Total'),0,1,'C',1);
 
 $pdf->SetFont('Arial','',10);
-for ($i = 0; $i <30 ; $i++) {
-  $pdf->SetX(15);
+
+for ($i = 0; $i <20 ; $i++) {
+
+  $pdf->SetX(15);//posicionamos en x
+
+  //-------------INTERCALAMOS COLOR LOS PARES DE UN COLOR Y LOS QUE NO DE OTRO
+
 if($i%2==0){
 $pdf->SetFillColor(232, 232, 232 );
 $pdf->SetDrawColor(65, 61, 61);
@@ -89,12 +89,16 @@ $pdf->SetDrawColor(65, 61, 61);
 $pdf->SetFillColor(255, 255, 255 );
 $pdf->SetDrawColor(65, 61, 61);
 }
-$pdf->Cell(12, 8, utf8_decode('1'),'B',0,'C',1);
+//--------------------------------TERMINAMOS DE PINTAR----------------------------
+
+//                          DATOS
+$pdf->Cell(12, 8, $i+1,'B',0,'C',1);
 $pdf->Cell(80, 8, utf8_decode('Titan Colosal'),'B',0,'C',1);
 $pdf->Cell(30, 8, utf8_decode('$20.50'),'B',0,'C',1);
 $pdf->Cell(30, 8, utf8_decode('4'),'B',0,'C',1);
 $pdf->Cell(30, 8, utf8_decode('$82.00'),'B',1,'C',1);
 $pdf->Ln(0.5);
+
 }
 
 $pdf->Output();

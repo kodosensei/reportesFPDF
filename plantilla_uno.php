@@ -20,7 +20,22 @@ class PDF extends FPDF
   
 function Header()
 {
-
+  $this->Image('img/logo.png',-1,-1,85);
+  $this->Image('img/shinheky.png',150,15,25);
+  
+  $this->SetY(40);
+  $this->SetX(145);
+  $this->SetFont('Arial','B',12);
+  
+  $this->SetTextColor(30,10,32);
+  $this->Cell(89, 8, 'Shingeki no Kyojin',0,1);
+  $this->SetY(45);
+  $this->SetX(147);
+  $this->SetFont('Arial','',8);
+  $this->Cell(40, 8, '1º E Villa Perales de Arriba');
+  
+  $this->Ln(30);
+  
 
 }
 
@@ -48,21 +63,6 @@ $pdf->SetTopMargin(15);
 $pdf->SetLeftMargin(10);
 $pdf->SetRightMargin(10);
 
-$pdf->Image('img/logo.png',-1,-1,85);
-$pdf->Image('img/shinheky.png',150,15,25);
-
-$pdf->SetY(40);
-$pdf->SetX(145);
-$pdf->SetFont('Arial','B',12);
-
-$pdf->SetTextColor(30,10,32);
-$pdf->Cell(89, 8, 'Shingeki no Kyojin',0,1);
-$pdf->SetY(45);
-$pdf->SetX(147);
-$pdf->SetFont('Arial','',8);
-$pdf->Cell(40, 8, '1º E Villa Perales de Arriba');
-
-$pdf->Ln(30);
 
 $pdf->SetX(15);
 $pdf->SetFillColor(210,57,57);
